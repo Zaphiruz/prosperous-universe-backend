@@ -23,7 +23,8 @@ app.get('/', (req, res) => {
 
 mongoose.connect(`mongodb+srv://${process.env.mongoAdminUsername}:${process.env.mongoAdminPassword}@pu.ms67p.mongodb.net/PUData?retryWrites=true&w=majority`, {
 	useNewUrlParser: true,
-	useUnifiedTopology: true
+	useUnifiedTopology: true,
+	useFindAndModify: false
 }, function(error) {
 	if (error) {
 		console.log('Failled to connect to DB!', error);
