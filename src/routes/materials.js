@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 		const materials = await Material.find();
 		res.json(materials);
 	} catch (error) {
-		console.error('Error getting materials', error)
+		console.error('Error getting materials', error);
 		res.status(500).send(error);
 	}
 });
@@ -19,7 +19,7 @@ router.get('/:id', async (req, res) => {
 		const materials = await Material.findOne({ id: req.params.id });
 		res.json(materials);
 	} catch (error) {
-		console.error('Error getting materials', error)
+		console.error('Error getting materials', error);
 		res.status(500).send(error);
 	}
 });
@@ -28,13 +28,13 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		let material = new Material(req.body);
-		let data = await material.save()
-		res.json(data)
+		let data = await material.save();
+		res.json(data);
 	} catch (error) {
-		console.error('Error saving material', error)
+		console.error('Error saving material', error);
 		res.status(500).send(error);
 	}
-})
+});
 
 // update
 router.put('/:id', async (req, res) => {
@@ -44,13 +44,27 @@ router.put('/:id', async (req, res) => {
 				returnOriginal: false,
 				omitUndefined: true
 			})
-			.exec()
+			.exec();
 		
-		res.json(data)
+		res.json(data);
 	} catch (error) {
-		console.error('Error updating material', error)
+		console.error('Error updating material', error);
 		res.status(500).send(error);
 	}
-})
+});
+
+// delete
+router.delete('/:id', async (req, res) => {
+	try{
+		let data = await Material
+			.findOneAndDelete({ id: req.params.id })
+			.exec();
+		
+		res.json(data);
+	} catch (error) {
+		console.error('Error deleting material', error);
+		res.status(500).send(error);
+	}
+});
 
 module.exports = router;
