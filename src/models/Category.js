@@ -1,9 +1,19 @@
-const mongoose = require('mongoose');
+import { Schema, model as Model } from 'mongoose';
+import { composeWithMongoose } from 'graphql-compose-mongoose';
 
-const CategorySchema = mongoose.Schema({
-	id: String,
-	name: String,
-	materials: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Material' }]
-})
+const CategorySchema = Schema(
+	{
+		id: String,
+		name: String,
+		materials: [String]
+	},
+	{
+		timestamps: {
+			createdAt: "created_at",
+			updatedAt: "updated_at"
+		}
+	}
+);
 
-module.exports = mongoose.model('Materials', CategorySchema);
+export const CategoryModel = Model('Categories', CategorySchema);
+export const CategoryTC = composeWithMongoose(CategoryModel);

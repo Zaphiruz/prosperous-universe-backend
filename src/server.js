@@ -1,38 +1,35 @@
-require('dotenv').config();
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+
+import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
+import { graphqlHTTP } from 'express-graphql';
+import graphqlSchema from './schemas/index'
+const extentions = function({ context }) {
+	return {
+		runTime: Date.now() - context.startTime
+	};
+}
+
+dotenv.config();
 
 const app = express();
-
-// middleware
-app.use(bodyParser.json());
-
-
-// routes
-let routes = {
-	'/materials': require('./routes/materials.js')
-}
-for(let [route, router] of Object.entries(routes)) {
-	app.use(route, router);
-}
-
-app.get('/', (req, res) => {
-	res.send('HOME');
-});
-
-mongoose.connect(`mongodb+srv://${process.env.mongoAdminUsername}:${process.env.mongoAdminPassword}@pu.ms67p.mongodb.net/PUData?retryWrites=true&w=majority`, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useFindAndModify: false
-}, function(error) {
-	if (error) {
-		console.log('Failled to connect to DB!', error);
-		return
-	}
-	console.log('Connected to DB!');
-});
+app.use('/graphql', graphqlHTTP((request) => {
+	return {
+		context: { startTime: Date.now() },
+		graphql: true,
+		schema: graphqlSchema,
+		extentions
+	};
+}));
 
 app.listen(8080, function() {
 	console.log(`Listening on 8080`);
+
+	mongoose.connect(`mongodb+srv://${process.env.mongoAdminUsername}:${process.env.mongoAdminPassword}@pu.ms67p.mongodb.net/PUData?retryWrites=true&w=majority`, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: false
+	});
 });
+
+mongoose.connection.on('error', console.error.bind(undefined, "Failled to connect to DB!"))
