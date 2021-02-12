@@ -1,24 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-const Material = require('../models/Material.js');
+const Category = require('../models/Category.js');
 
 // read
 router.get('/', async (req, res) => {
 	try {
-		const materials = await Material.find();
-		res.json(materials);
+		const categories = await Category.find();
+		res.json(categories);
 	} catch (error) {
-		console.error('Error getting materials', error);
+		console.error('Error getting categories', error);
 		res.status(500).send(error);
 	}
 });
 router.get('/:id', async (req, res) => {
 	try {
-		const materials = await Material.findOne({ id: req.params.id });
-		res.json(materials);
+		const categories = await Category.findOne({ id: req.params.id });
+		res.json(categories);
 	} catch (error) {
-		console.error('Error getting materials', error);
+		console.error('Error getting categories', error);
 		res.status(500).send(error);
 	}
 });
@@ -26,11 +26,11 @@ router.get('/:id', async (req, res) => {
 // create
 router.post('/', async (req, res) => {
 	try {
-		let material = new Material(req.body);
-		let data = await material.save();
+		let category = new Category(req.body);
+		let data = await category.save();
 		res.json(data);
 	} catch (error) {
-		console.error('Error saving material', error);
+		console.error('Error saving category', error);
 		res.status(500).send(error);
 	}
 });
@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
 // update
 router.put('/:id', async (req, res) => {
 	try {
-		let data = await Material
+		let data = await Category
 			.findOneAndUpdate({ id: req.params.id }, req.body, {
 				returnOriginal: false,
 				omitUndefined: true
@@ -47,7 +47,7 @@ router.put('/:id', async (req, res) => {
 		
 		res.json(data);
 	} catch (error) {
-		console.error('Error updating material', error);
+		console.error('Error updating category', error);
 		res.status(500).send(error);
 	}
 });
@@ -55,13 +55,13 @@ router.put('/:id', async (req, res) => {
 // delete
 router.delete('/:id', async (req, res) => {
 	try{
-		let data = await Material
+		let data = await Category
 			.findOneAndDelete({ id: req.params.id })
 			.exec();
 		
 		res.json(data);
 	} catch (error) {
-		console.error('Error deleting material', error);
+		console.error('Error deleting category', error);
 		res.status(500).send(error);
 	}
 });
