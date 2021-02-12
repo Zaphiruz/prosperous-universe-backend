@@ -1,4 +1,5 @@
 import { CategoryTC } from '../models/category';
+import { MaterialTC } from '../models/material';
 
 export const CategoryQuery = {
 	categoryById: CategoryTC.getResolver('findById'),
@@ -20,3 +21,11 @@ export const CategoryMutation = {
 	categoryRemoveOne: CategoryTC.getResolver('removeOne'),
 	categoryRemoveMany: CategoryTC.getResolver('removeMany'),
 };
+
+	CategoryTC.addRelation('materials', {
+		resolver: MaterialTC.getResolver('findByIds'),
+		prepareArgs: {
+			_ids: source => source.materials
+		},
+		projection: { materials: true }
+	})

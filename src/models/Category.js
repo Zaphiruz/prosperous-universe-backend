@@ -3,9 +3,13 @@ import { composeWithMongoose } from 'graphql-compose-mongoose';
 
 const CategorySchema = Schema(
 	{
+		_id: String,
 		id: String,
 		name: String,
-		materials: [String]
+		materials: [{
+			type: String,
+			ref: "Material"
+		}]
 	},
 	{
 		timestamps: {

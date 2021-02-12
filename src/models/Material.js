@@ -3,12 +3,16 @@ import { composeWithMongoose } from 'graphql-compose-mongoose';
 
 const MaterialSchema = Schema(
 	{
-		category: String,
+		_id: String,
 		id: String,
 		name: String,
 		ticker: String,
 		volume: Number,
-		weight: Number
+		weight: Number,
+		category: {
+			type: String,
+			ref: 'Category'
+		},
 	},
 	{
 		timestamps: {

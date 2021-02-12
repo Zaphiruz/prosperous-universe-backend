@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import { graphqlHTTP } from 'express-graphql';
-import graphqlSchema from './schemas/index'
+import graphqlSchema from './schemas/index';
 const extentions = function({ context }) {
 	return {
 		runTime: Date.now() - context.startTime
