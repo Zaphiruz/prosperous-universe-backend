@@ -1,27 +1,29 @@
 import { Schema, model as Model } from 'mongoose';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
-import PriceSchema from './shared/price';
-import BidSchema from './shared/bid';
+import Price from './shared/price';
+import Bid from './shared/bid';
+import Timestamp from './shared/timestamp';
 
 const BrokerSchema = Schema(
 	{
 		_id: String,
 		id: String,
 		ticker: String,
-		allTimeHigh: PriceSchema,
-		allTimeLow: PriceSchema,
-		high: PriceSchema,
-		low: PriceSchema,
-		narrowPriceBand: PriceSchema,
-		widePriceBand: PriceSchema,
-		previous: PriceSchema,
-		price: PriceSchema,
-		volume: PriceSchema,
-		ask: BidSchema,
-		bid: BidSchema,
+		allTimeHigh: Price,
+		allTimeLow: Price,
+		high: Price,
+		low: Price,
+		narrowPriceBand: Price,
+		widePriceBand: Price,
+		previous: Price,
+		price: Price,
+		volume: Price,
+		ask: Bid,
+		bid: Bid,
 		traded: Number,
 		supply: Number,
 		demand: Number,
+		priceTime: Timestamp,
 		buyingOrders: [{
 			type: String,
 			ref: 'Order'
