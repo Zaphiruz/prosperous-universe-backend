@@ -1,6 +1,7 @@
 
 import dotenv from 'dotenv';
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import { graphqlHTTP } from 'express-graphql';
 import graphqlSchema from './schemas/index';
@@ -13,6 +14,8 @@ const extentions = function({ context }) {
 dotenv.config();
 
 const app = express();
+app.use(cors()); // restrict later
+
 app.use('/graphql', graphqlHTTP((request) => {
 	return {
 		context: { startTime: Date.now() },
@@ -22,8 +25,8 @@ app.use('/graphql', graphqlHTTP((request) => {
 	};
 }));
 
-app.listen(8080, function() {
-	console.log(`Listening on 8080`);
+app.listen(8000, function() {
+	console.log(`Listening on 8000`);
 
 	mongoose.connect(`mongodb+srv://${process.env.mongoAdminUsername}:${process.env.mongoAdminPassword}@pu.ms67p.mongodb.net/PUData?retryWrites=true&w=majority`, {
 		useNewUrlParser: true,
