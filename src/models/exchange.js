@@ -1,18 +1,20 @@
 import { Schema, model as Model } from 'mongoose';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
 
-const MaterialSchema = Schema(
+const ExchangeSchema = Schema(
 	{
 		_id: String,
 		id: String,
 		name: String,
-		ticker: String,
-		volume: Number,
-		weight: Number,
-		category: {
+		code: String,
+		currency: {
 			type: String,
-			ref: 'Category'
+			ref: 'Currency'
 		},
+		operator: {
+			type: String,
+			ref: 'Operator'
+		}
 	},
 	{
 		timestamps: {
@@ -22,5 +24,5 @@ const MaterialSchema = Schema(
 	}
 );
 
-export const MaterialModel = Model('Materials', MaterialSchema);
-export const MaterialTC = composeWithMongoose(MaterialModel);
+export const ExchangeModel = Model('Exchanges', ExchangeSchema);
+export const ExchangeTC = composeWithMongoose(ExchangeModel);
