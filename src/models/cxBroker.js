@@ -4,7 +4,7 @@ import Price from './shared/price';
 import Bid from './shared/bid';
 import Timestamp from './shared/timestamp';
 
-const BrokerSchema = Schema(
+const CxBrokerSchema = Schema(
 	{
 		_id: String,
 		id: String,
@@ -53,5 +53,5 @@ const BrokerSchema = Schema(
 	}
 );
 
-export const BrokerModel = Model('Broker', BrokerSchema);
-export const BrokerTC = composeWithMongoose(BrokerModel);
+export const CxBrokerModel = Model('CxBrokers', CxBrokerSchema, 'cxBrokers');
+export const CxBrokerTC = composeWithMongoose(CxBrokerModel);
