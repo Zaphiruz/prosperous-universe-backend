@@ -8,6 +8,7 @@ import { ExchangeQuery, ExchangeMutation } from './exchange';
 import { CxBrokerQuery, CxBrokerMutation } from './cxBroker';
 import { OrderQuery, OrderMutation } from './order';
 import { FxBrokerQuery, FxBrokerMutation } from './fxBroker';
+import { ShipQuery, ShipMutation } from './ship';
 
 const schemaComposer = new SchemaComposer();
 
@@ -20,6 +21,7 @@ schemaComposer.Query.addFields({
 	...CxBrokerQuery,
 	...OrderQuery,
 	...FxBrokerQuery,
+	...ShipQuery,
 });
 
 schemaComposer.Mutation.addFields({
@@ -31,6 +33,7 @@ schemaComposer.Mutation.addFields({
 	...CxBrokerMutation,
 	...OrderMutation,
 	...FxBrokerMutation,
+	...ShipMutation,
 });
 
 export default schemaComposer.buildSchema();
