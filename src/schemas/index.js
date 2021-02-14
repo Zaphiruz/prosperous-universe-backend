@@ -6,6 +6,7 @@ import { CurrencyQuery, CurrencyMutation } from './currency';
 import { OperatorQuery, OperatorMutation } from './operator';
 import { ExchangeQuery, ExchangeMutation } from './exchange';
 import { BrokerQuery, BrokerMutation } from './broker';
+import { OrderQuery, OrderMutation } from './order';
 
 const schemaComposer = new SchemaComposer();
 
@@ -16,6 +17,7 @@ schemaComposer.Query.addFields({
 	...OperatorQuery,
 	...ExchangeQuery,
 	...BrokerQuery,
+	...OrderQuery,
 });
 
 schemaComposer.Mutation.addFields({
@@ -25,6 +27,7 @@ schemaComposer.Mutation.addFields({
 	...OperatorMutation,
 	...ExchangeMutation,
 	...BrokerMutation,
+	...OrderMutation,
 });
 
 export default schemaComposer.buildSchema();

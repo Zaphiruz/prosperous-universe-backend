@@ -2,6 +2,7 @@ import { BrokerTC } from '../models/broker';
 import { CurrencyTC } from '../models/currency';
 import { MaterialTC } from '../models/material';
 import { ExchangeTC } from '../models/exchange';
+import { OrderTC } from '../models/order';
 
 export const BrokerQuery = {
 	brokerById: BrokerTC.getResolver('findById'),
@@ -47,3 +48,19 @@ BrokerTC.addRelation('exchange', {
 	},
 	projection: { exchange: true }
 });
+
+BrokerTC.addRelation('buyingOrders', {
+	resolver: OrderTC.getResolver('findByIds'),
+	prepareArgs: {
+		_ids: source => source.buyingOrders
+	},
+	projection: { buyingOrders: true }
+})
+
+BrokerTC.addRelation('sellingOrders', {
+	resolver: OrderTC.getResolver('findByIds'),
+	prepareArgs: {
+		_ids: source => source.sellingOrders
+	},
+	projection: { sellingOrders: true }
+})
