@@ -1,5 +1,6 @@
 import { ShipTC } from '../models/ship';
 import { MaterialTC } from '../models/material';
+import { CompanyTC } from '../models/company';
  
 export const ShipQuery = {
 	shipById: ShipTC.getResolver('findById'),
@@ -28,4 +29,12 @@ ShipTC.getFieldOTC('repairMaterials').addRelation('material', {
 		_id: source => source.material
 	},
 	projection: { material: true }
+})
+
+ShipTC.addRelation('owner', {
+	resolver: CompanyTC.getResolver('findById'),
+	prepareArgs: {
+		_id: source => source.owner
+	},
+	projection: { owner: true }
 })
