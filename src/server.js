@@ -5,6 +5,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import { graphqlHTTP } from 'express-graphql';
 import graphqlSchema from './schemas/index';
+import graphqlPlayground from 'graphql-playground-middleware-express';
 const extentions = function({ context }) {
 	return {
 		runTime: Date.now() - context.startTime
@@ -24,6 +25,8 @@ app.use('/graphql', graphqlHTTP((request) => {
 		extentions
 	};
 }));
+
+app.get('/playground', graphqlPlayground({ endpoint: '/graphql' }));
 
 app.listen(8000, function() {
 	console.log(`Listening on 8000`);

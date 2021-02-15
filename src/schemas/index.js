@@ -13,6 +13,9 @@ import { CountryQuery, CountryMutation } from './country';
 import { CurrencyAccountQuery, CurrencyAccountMutation } from './currencyAccount';
 import { EntityQuery, EntityMutation } from './entity';
 import { CompanyQuery, CompanyMutation } from './company';
+import { BuildingQuery, BuildingMutation } from './building';
+import { SiteQuery, SiteMutation } from './site';
+import { StorageQuery, StorageMutation } from './storage';
 
 const schemaComposer = new SchemaComposer();
 
@@ -30,6 +33,9 @@ schemaComposer.Query.addFields({
 	...CurrencyAccountQuery,
 	...EntityQuery,
 	...CompanyQuery,
+	...BuildingQuery,
+	...SiteQuery,
+	...StorageQuery,
 });
 
 schemaComposer.Mutation.addFields({
@@ -46,6 +52,9 @@ schemaComposer.Mutation.addFields({
 	...CurrencyAccountMutation,
 	...EntityMutation,
 	...CompanyMutation,
+	...BuildingMutation,
+	...SiteMutation,
+	...StorageMutation,
 });
 
 export default schemaComposer.buildSchema();

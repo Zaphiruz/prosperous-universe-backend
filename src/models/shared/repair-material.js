@@ -1,6 +1,7 @@
 import { Schema } from 'mongoose';
+import Price from './price';
 
-export default Schema(
+export const RepairMaterial = Schema(
 	{
 		amount: Number,
 		material: {
@@ -9,3 +10,8 @@ export default Schema(
 		},
 	}
 );
+export default RepairMaterial;
+
+export const ValuableMaterial = RepairMaterial.add({
+	value: Price
+})
