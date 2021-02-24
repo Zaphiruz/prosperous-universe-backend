@@ -28,8 +28,9 @@ app.use('/graphql', graphqlHTTP((request) => {
 
 app.get('/playground', graphqlPlayground({ endpoint: '/graphql' }));
 
-app.listen(8000, function() {
-	console.log(`Listening on 8000`);
+let port = process.env.PORT || 80;
+app.listen(port, function() {
+	console.log(`Listening on ${port}`);
 
 	mongoose.connect(`mongodb+srv://${process.env.mongoAdminUsername}:${process.env.mongoAdminPassword}@pu.ms67p.mongodb.net/PUData?retryWrites=true&w=majority`, {
 		useNewUrlParser: true,
