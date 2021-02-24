@@ -10,6 +10,10 @@
     "type": "git",
     "url": "git+ssh://git@github.com/Zaphiruz/prosperous-universe-backend.git"
   },
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
