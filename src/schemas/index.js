@@ -42,25 +42,25 @@ schemaComposer.Query.addFields({
 	...WorkforceQuery,
 });
 
-schemaComposer.Mutation.addFields({
-	...MaterialMutation,
-	...CategoryMutation,
-	...CurrencyMutation,
-	...OperatorMutation,
-	...ExchangeMutation,
-	...CxBrokerMutation,
-	...OrderMutation,
-	...FxBrokerMutation,
-	...ShipMutation,
-	...CountryMutation,
-	...CurrencyAccountMutation,
-	...EntityMutation,
-	...CompanyMutation,
-	...BuildingMutation,
-	...SiteMutation,
-	...StorageMutation,
-	...NeedMutation,
-	...WorkforceMutation,
-});
+// schemaComposer.Mutation.addFields({
+// 	...MaterialMutation,
+// 	...CategoryMutation,
+// 	...CurrencyMutation,
+// 	...OperatorMutation,
+// 	...ExchangeMutation,
+// 	...CxBrokerMutation,
+// 	...OrderMutation,
+// 	...FxBrokerMutation,
+// 	...ShipMutation,
+// 	...CountryMutation,
+// 	...CurrencyAccountMutation,
+// 	...EntityMutation,
+// 	...CompanyMutation,
+// 	...BuildingMutation,
+// 	...SiteMutation,
+// 	...StorageMutation,
+// 	...NeedMutation,
+// 	...WorkforceMutation,
+// });
 
 export default schemaComposer.buildSchema();
