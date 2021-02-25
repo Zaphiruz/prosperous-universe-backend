@@ -17,6 +17,7 @@ const FxBrokerPrice = Schema(
 		high: CurrencyPrice,
 		low: CurrencyPrice,
 		open: CurrencyPrice,
+		close: CurrencyPrice,
 		previous: CurrencyPrice,
 		time: Timestamp,
 		traded: Price,
