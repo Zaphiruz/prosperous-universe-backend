@@ -17,6 +17,7 @@ const CxBrokerSchema = Schema(
 		widePriceBand: Price,
 		previous: Price,
 		price: Price,
+		priceAverage: Price,
 		volume: Price,
 		ask: Bid,
 		bid: Bid,
