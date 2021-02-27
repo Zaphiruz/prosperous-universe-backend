@@ -22,7 +22,7 @@ export const BuildingOptionMutation = {
 	buildingOptionRemoveMany: BuildingOptionTC.getResolver('removeMany'),
 };
 
-BuildingOptionTC.getFieldOTC('materials').addRelation('material', {
+BuildingOptionTC.getFieldOTC('materials').getFieldOTC('quantities').addRelation('material', {
 	resolver: MaterialTC.getResolver('findById'),
 	prepareArgs: {
 		_id: source => source.material

@@ -2,10 +2,16 @@ import { Schema, model as Model } from 'mongoose';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
 import RepairMaterial from './shared/repair-material';
 
-const workforce = Schema(
+const Workforce = Schema(
 	{
 		level: String,
-		capacity: Number
+		capacity: Number,
+	}
+)
+
+const MaterialsObject = Schema(
+	{
+		quantities: [RepairMaterial],
 	}
 )
 
@@ -19,8 +25,8 @@ const BuildingOptionSchema = Schema(
 		area: Number,
 		expertiseCategory: String,
 		needsFertileSoil: Boolean,
-		workforceCapacities: [workforce],
-		materials: [RepairMaterial]
+		workforceCapacities: [Workforce],
+		materials: MaterialsObject,
 	},
 	{
 		timestamps: {
