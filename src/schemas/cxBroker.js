@@ -8,7 +8,23 @@ export const CxBrokerQuery = {
 	cxBrokerById: CxBrokerTC.getResolver('findById'),
 	cxBrokerByIds: CxBrokerTC.getResolver('findByIds'),
 	cxBrokerOne: CxBrokerTC.getResolver('findOne'),
-	cxBrokerMany: CxBrokerTC.getResolver('findMany'),
+	cxBrokerMany: CxBrokerTC.getResolver('findMany')
+		.addFilterArg({
+			name: 'tickers',
+			type: '[String]',
+			description: 'Search by tickers',
+			query: (broker, tickers) => {
+				broker.ticker = { $in: tickers }
+			}
+		})
+		.addFilterArg({
+			name: 'materials',
+			type: '[String]',
+			description: 'Search by materials',
+			query: (broker, materials) => {
+				broker.material = { $in: materials }
+			}
+		}),
 	cxBrokerCount: CxBrokerTC.getResolver('count'),
 	cxBrokerConnection: CxBrokerTC.getResolver('connection'),
 	cxBrokerPagination: CxBrokerTC.getResolver('pagination'),
@@ -55,7 +71,7 @@ CxBrokerTC.addRelation('buyingOrders', {
 		_ids: source => source.buyingOrders
 	},
 	projection: { buyingOrders: true }
-})
+});
 
 CxBrokerTC.addRelation('sellingOrders', {
 	resolver: OrderTC.getResolver('findByIds'),
@@ -63,4 +79,4 @@ CxBrokerTC.addRelation('sellingOrders', {
 		_ids: source => source.sellingOrders
 	},
 	projection: { sellingOrders: true }
-})
+});
