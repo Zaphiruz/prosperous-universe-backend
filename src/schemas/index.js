@@ -18,6 +18,7 @@ import { SiteQuery, SiteMutation } from './site';
 import { StorageQuery, StorageMutation } from './storage';
 import { NeedQuery, NeedMutation } from './need';
 import { WorkforceQuery, WorkforceMutation } from './workforce';
+import { BuildingOptionQuery, BuildingOptionMutation } from './buildingOption';
 
 const schemaComposer = new SchemaComposer();
 
@@ -40,6 +41,7 @@ schemaComposer.Query.addFields({
 	...StorageQuery,
 	...NeedQuery,
 	...WorkforceQuery,
+	...BuildingOptionQuery,
 });
 
 // schemaComposer.Mutation.addFields({
@@ -61,6 +63,7 @@ schemaComposer.Query.addFields({
 // 	...StorageMutation,
 // 	...NeedMutation,
 // 	...WorkforceMutation,
+// 	...BuildingOptionMutation,
 // });
 
 export default schemaComposer.buildSchema();
