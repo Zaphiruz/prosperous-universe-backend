@@ -50,8 +50,8 @@ httpServer.listen(80, (err) => {
 
 if (process.env.NODE_ENV === 'production') {
 	const key = fs.readFileSync('/etc/letsencrypt/live/prosperon.app/privkey.pem', 'utf-8');
-	const cert = fs.readFileSync('/etc/letsencrypt/live/prosperon.app/cert.pem');
-	const ca = fs.readFileSync('/etc/letsencrypt/live/prosperon.app/chain.pem');
+	const cert = fs.readFileSync('/etc/letsencrypt/live/prosperon.app/cert.pem', 'utf-8');
+	const ca = fs.readFileSync('/etc/letsencrypt/live/prosperon.app/chain.pem', 'utf-8');
 
 	let httpServer = https.createServer({key, cert, ca}, app);
 	httpServer.listen(443, (err) => {
