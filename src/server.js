@@ -31,7 +31,7 @@ app.use('/graphql', graphqlHTTP((request) => {
 
 app.get('/playground', graphqlPlayground({ endpoint: '/graphql' }));
 
-let port = process.env.PORT || 8080;
+let port = 8080;
 app.listen(port, function() {
 	console.log(`Listening on ${port}`);
 
