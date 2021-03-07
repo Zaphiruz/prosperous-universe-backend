@@ -15,9 +15,9 @@ const extentions = function({ context }) {
 dotenv.config();
 
 const app = express();
-app.use(cors()); // restrict later
 
-app.use('/graphql', graphqlHTTP((request) => {
+app.options('/graphql', cors());
+app.use('/graphql', cors() ,graphqlHTTP((request) => {
 	return {
 		context: { startTime: Date.now() },
 		graphql: true,
