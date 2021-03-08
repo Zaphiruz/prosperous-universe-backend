@@ -6,6 +6,11 @@ import mongoose from 'mongoose';
 import { graphqlHTTP } from 'express-graphql';
 import graphqlSchema from './schemas/index';
 import graphqlPlayground from 'graphql-playground-middleware-express';
+import bodyParser from 'body-parser';
+
+// routes
+import storages from './routes/storages';
+
 const extentions = function({ context }) {
 	return {
 		runTime: Date.now() - context.startTime
@@ -15,6 +20,18 @@ const extentions = function({ context }) {
 dotenv.config();
 
 const app = express();
+
+// post middleware
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+// routes
+const routes = {
+	storages
+};
+for(let [route, router] of Object.entries(routes)) {
+	app.use(`/${route}`, router);
+}
 
 app.options('/graphql', cors());
 app.use('/graphql', cors() ,graphqlHTTP((request) => {

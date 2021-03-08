@@ -47,3 +47,10 @@ const StorageSchema = Schema(
 
 export const StorageModel = Model('Storages', StorageSchema);
 export const StorageTC = composeWithMongoose(StorageModel);
+
+export function normalizeStorage(obj) {
+	return {
+		...obj,
+		_id: obj.id
+	}
+}
