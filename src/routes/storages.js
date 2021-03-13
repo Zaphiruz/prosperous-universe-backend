@@ -3,6 +3,7 @@ const router = express.Router();
 import { StorageModel, normalizeStorage } from '../models/storage';
 
 router.post('/', async (req, res) => {
+	console.log("Recieved request")
 	try {
 		console.log(req.body)
 		let storage = await saveStorage(req.body);

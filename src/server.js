@@ -22,8 +22,10 @@ dotenv.config();
 const app = express();
 
 // post middleware
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+//app.use(bodyParser.urlencoded({ extended: true }))
+//app.use(bodyParser.json())
+
+app.use(express.json());
 
 // routes
 const routes = {
