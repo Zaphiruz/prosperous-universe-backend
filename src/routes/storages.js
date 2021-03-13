@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 import { StorageModel, normalizeStorage } from '../models/storage';
 
+router.options('/');
 router.post('/', async (req, res) => {
 	try {
 		console.log(req.body)

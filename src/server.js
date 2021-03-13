@@ -6,7 +6,6 @@ import mongoose from 'mongoose';
 import { graphqlHTTP } from 'express-graphql';
 import graphqlSchema from './schemas/index';
 import graphqlPlayground from 'graphql-playground-middleware-express';
-import bodyParser from 'body-parser';
 
 // routes
 import storages from './routes/storages';
@@ -22,15 +21,14 @@ dotenv.config();
 const app = express();
 
 // post middleware
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(express.json());
 
 // routes
 const routes = {
 	storages
 };
 for(let [route, router] of Object.entries(routes)) {
-	app.use(`/${route}`, router);
+	app.use(`/${route}`, cors(), router);
 }
 
 app.options('/graphql', cors());
