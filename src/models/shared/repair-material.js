@@ -15,3 +15,10 @@ export default RepairMaterial;
 export const ValuableMaterial = RepairMaterial.add({
 	value: Price
 })
+
+export function normalizeMaterial(obj) {
+	return {
+		...obj,
+		material: obj.material.id
+	}
+}

@@ -1,6 +1,6 @@
 import { Schema, model as Model } from 'mongoose';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
-import { ValuableMaterial } from './shared/repair-material';
+import { ValuableMaterial, normalizeMaterial } from './shared/repair-material';
 
 const ItemDetails = Schema (
 	{
@@ -51,6 +51,12 @@ export const StorageTC = composeWithMongoose(StorageModel);
 export function normalizeStorage(obj) {
 	return {
 		...obj,
-		_id: obj.id
+		_id: obj.id,
+		items: obj.items.map(itemDetail => {
+			return {
+				...itemDetail,
+				quantity: normalizeMaterial(itemDetail.quantity)
+			};
+		})
 	}
 }
