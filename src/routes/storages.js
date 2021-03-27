@@ -7,15 +7,15 @@ router.post('/', async (req, res) => {
 	try {
 		// Check if dictionary
 		let input = []
-		if (req.body.constructor == Object) {
-			for (var key in req.body) {
+		if (req.body) {
+			for (let key in req.body) {
 				req.body[key]._id = req.body[key].id;
 				input.push(req.body[key]);
 			}
 		} else {
 			input.push(req.body);
 		}
-		saveStorage(input);
+		await saveStorage(input);
 		return res.send(input);
 	} catch(e) {
 		console.error(e);
@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 
 async function saveStorage(data) {
 	let bulkOps = [];
-	for (var i = 0; i < data.length; i++) {
+	for (let i = 0; i < data.length; i++) {
 		if (data[i]._id) {
 			let normalizedData = normalizeStorage(data[i]);
 			let model = new StorageModel(normalizedData);
