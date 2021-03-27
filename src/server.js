@@ -8,6 +8,8 @@ import graphqlPlayground from 'graphql-playground-middleware-express';
 // routes
 import graphql from './routes/graphql';
 import storages from './routes/storages';
+import companies from './routes/companies';
+import workforce from './routes/workforces';
 
 dotenv.config();
 
@@ -19,7 +21,9 @@ app.use(express.json());
 // routes
 const routes = {
 	graphql,
-	storages
+	storages,
+	companies,
+	workforce
 };
 for(let [route, router] of Object.entries(routes)) {
 	app.use(`/${route}`, cors(), router);

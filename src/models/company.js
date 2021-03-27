@@ -20,6 +20,7 @@ const CompanySchema = Schema(
 		_id: String,
 		id: String,
 		name: String,
+		code: String,
 		startingProfile: String,
 		ratingReport: RatingReport,
 

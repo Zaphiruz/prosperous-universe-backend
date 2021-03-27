@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\models",
+    "\\src\\routes",
+    "\\src\\schemas"
   ],
+  "SelectedNode": "\\src\\routes\\companies.js",
   "PreviewInSolutionExplorer": false
 }
