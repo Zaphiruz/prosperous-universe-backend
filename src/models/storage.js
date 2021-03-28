@@ -11,7 +11,7 @@ const StorageSchema = Schema(
 		locked: Boolean,
 		rank: Number,
 		tradeStore: Boolean,
-		type: String,
+		type: { type: String },
 		volumeCapacity: Number,
 		volumeLoad: Number,
 		weightCompacity: Number,
