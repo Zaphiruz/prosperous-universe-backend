@@ -7,7 +7,7 @@ const bulkWriteWorkforces = bulkWrite(WorkforceModel);
 
 router.post('/', async (req, res) => {
 	try {
-		console.log("Received workforce request", req.body);
+		console.log("Received workforce request");
 
 		let input = [];
 

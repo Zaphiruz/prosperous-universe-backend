@@ -22,7 +22,7 @@ export const FxBrokerMutation = {
 	fxBrokerRemoveMany: FxBrokerTC.getResolver('removeMany'),
 };
 
-FxBrokerTC.addRelation('base', {
+FxBrokerTC.getFieldOTC('pair').addRelation('base', {
 	resolver: CurrencyTC.getResolver('findById'),
 	prepareArgs: {
 		_id: source => source.base
@@ -30,7 +30,7 @@ FxBrokerTC.addRelation('base', {
 	projection: { base: true }
 });
 
-FxBrokerTC.addRelation('quote', {
+FxBrokerTC.getFieldOTC('pair').addRelation('quote', {
 	resolver: CurrencyTC.getResolver('findById'),
 	prepareArgs: {
 		_id: source => source.quote

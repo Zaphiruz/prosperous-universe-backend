@@ -10,6 +10,7 @@ import graphql from './routes/graphql';
 import storages from './routes/storages';
 import companies from './routes/companies';
 import workforce from './routes/workforces';
+import fxBrokers from './routes/fxBrokers';
 
 dotenv.config();
 
@@ -23,7 +24,8 @@ const routes = {
 	graphql,
 	storages,
 	companies,
-	workforce
+	workforce,
+	fxBrokers,
 };
 for(let [route, router] of Object.entries(routes)) {
 	app.use(`/${route}`, cors(), router);
