@@ -65,10 +65,11 @@ const ProductionLineSchema = Schema(
 			},
 			productionFeeFactor: Price
 		}],
+	  //efficiencyFactors
 		efficiencyFactors: [{
 			effectivity: Number,
 			expertiseCategory: String,
-			type: String,
+			type: { type: String },
 			value: Number
 		}]
 	},
