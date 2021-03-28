@@ -4,16 +4,15 @@ import Price from './shared/price';
 import Timestamp from './shared/timestamp';
 import RepairMaterial from './shared/repair-material';
 
-const Module = Schema(
-	{
-		id: String,
-		platformId: String,
-		reactorId: String,
-		reactorName: String,
-		reactorTicker: String,
-		type: String,
-	}
-)
+const Module = {
+	id: String,
+	platformId: String,
+	reactorId: String,
+	reactorName: String,
+	reactorTicker: String,
+	type: String,
+}
+
 
 const BuildingSchema = Schema(
 	{

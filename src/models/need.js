@@ -1,18 +1,17 @@
 import { Schema, model as Model } from 'mongoose';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
 
-const PopulationNeeds = Schema (
-	{
-		category: String,
-		essential: Boolean,
-		satisfaction: Number,
-		unitsPer100: Number,
-		material: {
-			type: String,
-			ref: 'Material'
-		}
+const PopulationNeeds = {
+	category: String,
+	essential: Boolean,
+	satisfaction: Number,
+	unitsPer100: Number,
+	material: {
+		type: String,
+		ref: 'Material'
 	}
-)
+}
+
 
 const NeedSchema = Schema(
 	{
