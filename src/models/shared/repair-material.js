@@ -8,8 +8,6 @@ export const RepairMaterial = {
 	},
 }
 
-export default RepairMaterial;
-
 export const ValuableMaterial = {
 	...RepairMaterial,
 	value: Price
@@ -21,3 +19,20 @@ export function normalizeMaterial(obj) {
 		material: obj.material.id
 	}
 }
+
+export const ItemDetails = {
+	id: String,
+	quantity: ValuableMaterial,
+	type: { type: String },
+	volume: Number,
+	weight: Number,
+}
+
+export function normalizeItemDetails(obj) {
+	return {
+		...obj,
+		quantity: normalizeMaterial(obj.quantity)
+	};
+}
+
+export default RepairMaterial;
