@@ -25,7 +25,8 @@ const StorageSchema = Schema(
 		// addressableId: { // if type === 'STORE', its a site. else, a ship
 		// 	type: String,
 		// 	refPath: 'type'
-		// }
+		// },
+		addressableId: String
 	},
 	{
 		timestamps: {

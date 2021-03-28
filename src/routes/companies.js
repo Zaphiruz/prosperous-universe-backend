@@ -4,12 +4,11 @@ import { CompanyModel } from '../models/company';
 import { CurrencyAccountModel } from '../models/currencyAccount';
 import { write as bulkWrite } from '../utils/bulkOps';
 
-const bulkWriteCompany = bulkWrite(CompanyModel);
 const bulkWriteAccounts = bulkWrite(CurrencyAccountModel);
 
 router.post('/', async (req, res) => {
 	try {
-		console.log("Received request");
+		console.log("Recieved Companies");
 
 		var requestBody = req.body;
 		var companyId = req.body.id;
@@ -77,10 +76,10 @@ router.post('/', async (req, res) => {
 
 		// Push objects to Mongo
 		// Push Addresses
-		await bulkWriteCompany(requestBody);
+		await saveCompany(requestBody);
 		await bulkWriteAccounts(currencies);
 
-		return res.send(requestBody);
+		return res.send([requestBody._id]);
 	} catch (e) {
 		console.error(e);
 		return res.status(400).send(e);
@@ -88,15 +87,7 @@ router.post('/', async (req, res) => {
 })
 
 async function saveCompany(data) {
-	//let normalizedData = normalizeStorage(data);
-	//console.log(normalizedData)
-	let model = new CompanyModel(data);
-	if (data._id) {
-		await model.updateOne({ _id: data._id }, data, { upsert: true }, function (err, doc) {
-			if (err) return { err: err };
-			return true;
-		});
-	}
+	return CompanyModel.updateOne({ _id: data._id }, data, { upsert: true });
 }
 
 export default router;
