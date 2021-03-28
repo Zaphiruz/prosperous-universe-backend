@@ -4,10 +4,13 @@ import { composeWithMongoose } from 'graphql-compose-mongoose';
 const EntitySchema = Schema(
 	{
 		_id: String,
-		id: String,
-		_type: String,
-		name: String,
-		naturalId: String
+		type: { type: String },
+		entity: {
+			id: String,
+			name: String,
+			naturalId: String,
+			_type: String,
+		}
 	},
 	{
 		timestamps: {
