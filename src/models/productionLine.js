@@ -14,7 +14,7 @@ const ProductionLineSchema = Schema(
 			type: String,
 			ref: 'Entity'
 		}],
-		type: String,
+		type: { type: String },
 		capacity: Number,
 		slots: Number,
 		efficiency: Number,
