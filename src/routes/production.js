@@ -43,9 +43,6 @@ router.post('/', async (req, res) => {
 				}
 				req.body[key].productionTemplates[i].productionFeeCollector = req.body[key].productionTemplates[i].productionFeeCollector.id;
 			}
-
-			console.log(req.body[key].efficiencyFactors);
-
 			output.push(req.body[key]);
 		}
 

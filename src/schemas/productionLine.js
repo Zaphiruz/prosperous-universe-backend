@@ -36,7 +36,6 @@ ProductionLineTC.addRelation('address', {
 
 ProductionLineTC
 	.getFieldOTC('orders')
-	.getFieldOTC('productionFeeCollector')
 	.addRelation('productionFeeCollector', {
 		resolver: OperatorTC.getResolver('findById'),
 		prepareArgs: {

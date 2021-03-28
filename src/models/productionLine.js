@@ -9,6 +9,7 @@ const ProductionLineSchema = Schema(
 	{
 		_id: String,
 		id: String,
+		owner: String,
 		siteId: String,
 		address: [{
 			type: String,
