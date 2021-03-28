@@ -18,6 +18,7 @@ const BuildingSchema = Schema(
 	{
 		_id: String,
 		id: String,
+		area: Number,
 		bookValue: Price,
 		condition: Number,
 		creationTime: Timestamp,
@@ -29,7 +30,7 @@ const BuildingSchema = Schema(
 			type: String,
 			ref: "Company"
 		},
-		site: {
+		siteId: {
 			type: String,
 			ref: 'Site'
 		}

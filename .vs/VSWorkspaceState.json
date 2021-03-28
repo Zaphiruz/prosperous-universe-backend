@@ -4,7 +4,8 @@
     "\\src",
     "\\src\\models",
     "\\src\\routes",
-    "\\src\\schemas"
+    "\\src\\schemas",
+    "\\src\\utils"
   ],
   "SelectedNode": "\\src\\routes\\companies.js",
   "PreviewInSolutionExplorer": false
