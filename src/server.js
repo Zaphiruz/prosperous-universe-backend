@@ -10,6 +10,7 @@ import graphql from './routes/graphql';
 import storages from './routes/storages';
 import companies from './routes/companies';
 import workforce from './routes/workforces';
+import production from './routes/production';
 import fxBrokers from './routes/fxBrokers';
 
 dotenv.config();
@@ -24,6 +25,8 @@ const routes = {
 	graphql,
 	storages,
 	companies,
+	workforce,
+	production,
 	workforce,
 	fxBrokers,
 };

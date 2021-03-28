@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
 	try {
 		// Check if dictionary
 		let input = []
-		if (req.body) {
+		if (req.body instanceof Object) {
 			for (let key in req.body) {
 				req.body[key]._id = req.body[key].id;
 				input.push(req.body[key]);

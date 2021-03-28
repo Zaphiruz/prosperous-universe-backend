@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
 
 		let input = [];
 
-		for (var key in req.body) {
+		for (let key in req.body) {
 			delete "address" in req.body[key];
 			input.push(req.body[key]);
 		}
