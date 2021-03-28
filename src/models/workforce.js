@@ -41,3 +41,13 @@ const WorkforceSchema = Schema(
 
 export const WorkforceModel = Model('Workforces', WorkforceSchema);
 export const WorkforceTC = composeWithMongoose(WorkforceModel);
+
+export const normalizeWorkforce = (data) => {
+	return {
+		...data,
+		workforces: data.workforces.map(workforce => ({
+			...workforce,
+			needs: workforce.level
+		}))
+	}
+}

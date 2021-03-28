@@ -30,6 +30,7 @@
     "graphql-compose": "^7.25.0",
     "graphql-compose-mongoose": "^9.1.0",
     "graphql-playground-middleware-express": "^1.7.22",
+    "lodash": "^4.17.21",
     "mongodb": "^3.6.4",
     "mongoose": "^5.11.15"
   }

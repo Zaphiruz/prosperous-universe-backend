@@ -2,7 +2,12 @@ import { Schema, model as Model } from 'mongoose';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
 import { ItemDetails, normalizeItemDetails } from './shared/repair-material';
 
-const StorageSchema = Schema(
+export const SiteStorageTypes = [
+	'STORE',
+	'WAREHOUSE_STORE'
+]
+
+const StorageSiteSchema = Schema(
 	{
 		_id: String,
 		id: String,
@@ -21,12 +26,10 @@ const StorageSchema = Schema(
 			type: String,
 			ref: 'Company'
 		},
-		// TODO: resolve mixed type as union?
-		// addressableId: { // if type === 'STORE', its a site. else, a ship
-		// 	type: String,
-		// 	refPath: 'type'
-		// },
-		addressableId: String
+		addressableId: {
+			type: String,
+			refPath: 'Site'
+		},
 	},
 	{
 		timestamps: {
@@ -36,10 +39,10 @@ const StorageSchema = Schema(
 	}
 );
 
-export const StorageModel = Model('Storages', StorageSchema);
-export const StorageTC = composeWithMongoose(StorageModel);
+export const StorageSiteModel = Model('StorageSites', StorageSiteSchema, 'storageSites');
+export const StorageSiteTC = composeWithMongoose(StorageSiteModel);
 
-export function normalizeStorage(obj) {
+export function normalizeStorageSite(obj) {
 	return {
 		...obj,
 		_id: obj.id,

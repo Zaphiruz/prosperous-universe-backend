@@ -15,7 +15,8 @@ import { EntityQuery, EntityMutation } from './entity';
 import { CompanyQuery, CompanyMutation } from './company';
 import { BuildingQuery, BuildingMutation } from './building';
 import { SiteQuery, SiteMutation } from './site';
-import { StorageQuery, StorageMutation } from './storage';
+import { StorageSiteQuery, StorageSiteMutation } from './storageSite';
+import { StorageShipQuery, StorageShipMutation } from './storageShip';
 import { NeedQuery, NeedMutation } from './need';
 import { WorkforceQuery, WorkforceMutation } from './workforce';
 import { BuildingOptionQuery, BuildingOptionMutation } from './buildingOption';
@@ -38,7 +39,8 @@ schemaComposer.Query.addFields({
 	...CompanyQuery,
 	...BuildingQuery,
 	...SiteQuery,
-	...StorageQuery,
+	...StorageSiteQuery,
+	...StorageShipQuery,
 	...NeedQuery,
 	...WorkforceQuery,
 	...BuildingOptionQuery,
@@ -60,7 +62,8 @@ schemaComposer.Query.addFields({
 // 	...CompanyMutation,
 // 	...BuildingMutation,
 // 	...SiteMutation,
-// 	...StorageMutation,
+// 	...StorageSiteMutation,
+// 	...StorageShipMutation,
 // 	...NeedMutation,
 // 	...WorkforceMutation,
 // 	...BuildingOptionMutation,

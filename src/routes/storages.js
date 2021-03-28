@@ -1,24 +1,23 @@
 import express from 'express';
+import { partition } from 'lodash'
 const router = express.Router();
-import { StorageModel, normalizeStorage } from '../models/storage';
+import { StorageShipModel, normalizeStorageShip, ShipStorageTypes } from '../models/storageShip';
+import { StorageSiteModel, normalizeStorageSite, SiteStorageTypes } from '../models/storageSite';
 import { write as bulkWrite } from '../utils/bulkOps';
 
-const bulkWritestorages = bulkWrite(StorageModel);
+const bulkWriteSiteStorages = bulkWrite(StorageSiteModel);
+const bulkWriteShipStorages = bulkWrite(StorageShipModel);
 
 router.post('/', async (req, res) => {
 	console.log("Recieved storages request")
 	try {
-		// Check if dictionary
-		let input = []
-		if (req.body instanceof Object) {
-			for (let key in req.body) {
-				req.body[key]._id = req.body[key].id;
-				input.push(req.body[key]);
-			}
-		} else {
-			input.push(req.body);
-		}
-		return res.send(await bulkWritestorages(input));
+		let data = Object.values(req.body);
+		let [ships, sites] = partition(data, ({ type }) => ShipStorageTypes.includes(type));
+
+		console.log(ships.length, sites.length)
+		let siteRecords = await bulkWriteSiteStorages(sites.map(normalizeStorageSite));
+		let shipRecords = await bulkWriteShipStorages(ships.map(normalizeStorageShip));
+		return res.send({siteRecords, shipRecords});
 	} catch(e) {
 		console.error(e);
 		return res.status(400).send(e);
