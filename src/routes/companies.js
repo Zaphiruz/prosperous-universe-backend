@@ -31,8 +31,8 @@ router.post('/', async (req, res) => {
 		requestBody.startingLocation = addressesToAddBack;
 
 		// Pull out the currencies for their own upload
-		var currencies = [];	// <---- Need to send along to another function to upload to Mongo
-		for (var i = 0; i < requestBody.currencyAccounts.length; i++) {
+		let currencies = [];	// <---- Need to send along to another function to upload to Mongo
+		for (let i = 0; i < requestBody.currencyAccounts.length; i++) {
 			// Add key
 			requestBody.currencyAccounts[i]._id = companyId.concat(".", requestBody.currencyAccounts[i].currencyBalance.currency);
 			requestBody.currencyAccounts[i].id = requestBody.currencyAccounts[i]._id;

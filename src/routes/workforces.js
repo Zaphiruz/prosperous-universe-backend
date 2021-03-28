@@ -4,11 +4,11 @@ import { WorkforceModel } from '../models/workforce';
 
 router.post('/', async (req, res) => {
 	try {
-		console.log("Received workforce request", req.body);
+		console.log("Received workforce request");
 
 		let input = [];
 
-		for (var key in req.body) {
+		for (let key in req.body) {
 			delete "address" in req.body[key];
 			input.push(req.body[key]);
 		}
