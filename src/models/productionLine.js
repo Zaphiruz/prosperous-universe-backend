@@ -14,7 +14,7 @@ const ProductionLineSchema = Schema(
 			type: String,
 			ref: 'Entity'
 		}],
-		type: String,
+		type: { type: String },
 		capacity: Number,
 		slots: Number,
 		efficiency: Number,
@@ -65,10 +65,11 @@ const ProductionLineSchema = Schema(
 			},
 			productionFeeFactor: Price
 		}],
+	  //efficiencyFactors
 		efficiencyFactors: [{
 			effectivity: Number,
 			expertiseCategory: String,
-			type: String,
+			type: { type: String },
 			value: Number
 		}]
 	},
