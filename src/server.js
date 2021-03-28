@@ -12,6 +12,7 @@ import companies from './routes/companies';
 import workforce from './routes/workforces';
 import production from './routes/production';
 import fxBrokers from './routes/fxBrokers';
+import sites from './routes/sites';
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ const routes = {
 	production,
 	workforce,
 	fxBrokers,
+	sites,
 };
 for(let [route, router] of Object.entries(routes)) {
 	app.use(`/${route}`, cors(), router);
