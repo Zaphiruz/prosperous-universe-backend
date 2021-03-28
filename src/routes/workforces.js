@@ -15,10 +15,7 @@ router.post('/', async (req, res) => {
 			delete "address" in req.body[key];
 			input.push(req.body[key]);
 		}
-
-		await bulkWriteWorkforces(input)
-
-		return res.send("Workforce request: Success");
+		return res.send(await bulkWriteWorkforces(input));
 	} catch (e) {
 		console.error(e);
 		return res.status(400).send(e);

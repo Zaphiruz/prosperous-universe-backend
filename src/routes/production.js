@@ -1,6 +1,9 @@
 import express, { request } from 'express';
 const router = express.Router();
 import { ProductionLineModel } from '../models/productionLine';
+import { write as bulkWrite } from '../utils/bulkOps';
+
+const bulkWriteProductionLine = bulkWrite(ProductionLineModel);
 
 router.post('/', async (req, res) => {
 	try {
@@ -46,36 +49,11 @@ router.post('/', async (req, res) => {
 			output.push(req.body[key]);
 		}
 
-		return res.send(await saveProduction(output));
+		return res.send(await bulkWriteProductionLine(output));
 	} catch (e) {
 		console.error(e);
 		return res.status(400).send(e);
 	}
 });
-
-async function saveProduction(data) {
-	//let normalizedData = normalizeStorage(data);
-	//console.log(normalizedData)
-	//console.log(data);
-	let bulkOps = [];
-	for (var i = 0; i < data.length; i++) {
-		if (data[i]._id) {
-			let model = new ProductionLineModel(data[i]);
-			bulkOps.push({
-				updateOne: {
-					filter: { _id: model._id },
-					update: model,
-					upsert: true
-				}
-			});
-		}
-	}
-
-	try {
-		return await ProductionLineModel.collection.bulkWrite(bulkOps);
-	} catch (err) {
-		return err;
-	}
-}
 
 export default router;

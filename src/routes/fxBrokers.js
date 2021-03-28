@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
 	try {
 		console.log("Received fxBrokers request");
 
-		let data = req.body || [];
+		let data = Array.isArray(req.body) ? req.body : [];
 		console.log(data);
 		let normalized = data.map(normalizeFxBroker)
 		console.log(normalized);

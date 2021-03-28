@@ -77,7 +77,7 @@ router.post('/', async (req, res) => {
 
 		// Push objects to Mongo
 		// Push Addresses
-		await saveCompany(requestBody);
+		await bulkWriteCompany(requestBody);
 		await bulkWriteAccounts(currencies);
 
 		return res.send(requestBody);
