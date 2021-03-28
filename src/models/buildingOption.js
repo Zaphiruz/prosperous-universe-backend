@@ -8,7 +8,7 @@ const BuildingOptionSchema = Schema(
 		id: String,
 		name: String,
 		ticker: String,
-		type: String,
+		type: { type: String },
 		area: Number,
 		expertiseCategory: String,
 		needsFertileSoil: Boolean,

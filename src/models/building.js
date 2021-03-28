@@ -10,7 +10,7 @@ const Module = {
 	reactorId: String,
 	reactorName: String,
 	reactorTicker: String,
-	type: String,
+	type: { type: String},
 }
 
 
