@@ -1,6 +1,9 @@
 import express, { request } from 'express';
 const router = express.Router();
 import { WorkforceModel } from '../models/workforce';
+import { write as bulkWrite } from '../utils/bulkOps';
+
+const bulkWriteWorkforces = bulkWrite(WorkforceModel);
 
 router.post('/', async (req, res) => {
 	try {
@@ -13,7 +16,7 @@ router.post('/', async (req, res) => {
 			input.push(req.body[key]);
 		}
 
-		saveWorkforce(input);
+		await bulkWriteWorkforces(input)
 
 		return res.send("Workforce request: Success");
 	} catch (e) {
@@ -21,34 +24,5 @@ router.post('/', async (req, res) => {
 		return res.status(400).send(e);
 	}
 })
-
-async function saveWorkforce(data) {
-	//let normalizedData = normalizeStorage(data);
-	//console.log(normalizedData)
-
-	let bulkOps = [];
-
-	for (var i = 0; i < data.length; i++) {
-		if (data[i]._id) {
-			let model = new WorkforceModel(data[i]);
-			bulkOps.push({
-				updateOne: {
-					filter: { _id: model._id },
-					update: model,
-					upsert: true
-				}
-			});
-		}
-	}
-
-	try {
-		await WorkforceModel.collection.bulkWrite(bulkOps);
-		console.log("Bulk update ok");
-		return "saveWorkforce: Success";
-	} catch (err) {
-		console.error('Bulk update error', err);
-		return "saveWorkforce: Failed";
-	}
-}
 
 export default router;

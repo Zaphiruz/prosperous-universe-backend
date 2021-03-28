@@ -2,15 +2,13 @@ import { Schema, model as Model } from 'mongoose';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
 import { ValuableMaterial, normalizeMaterial } from './shared/repair-material';
 
-const ItemDetails = Schema (
-	{
-		id: String,
-		quantity: ValuableMaterial,
-		type: String,
-		volume: Number,
-		weight: Number,
-	}
-)
+const ItemDetails = {
+	id: String,
+	quantity: ValuableMaterial,
+	type: String,
+	volume: Number,
+	weight: Number,
+}
 
 const StorageSchema = Schema(
 	{

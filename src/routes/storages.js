@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 		} else {
 			input.push(req.body);
 		}
-		saveStorage(input);
+		await saveStorage(input);
 		return res.send(input);
 	} catch(e) {
 		console.error(e);

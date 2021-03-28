@@ -2,6 +2,10 @@ import express, { request } from 'express';
 const router = express.Router();
 import { CompanyModel } from '../models/company';
 import { CurrencyAccountModel } from '../models/currencyAccount';
+import { write as bulkWrite } from '../utils/bulkOps';
+
+const bulkWriteCompany = bulkWrite(CompanyModel);
+const bulkWriteAccounts = bulkWrite(CurrencyAccountModel);
 
 router.post('/', async (req, res) => {
 	try {
@@ -50,18 +54,31 @@ router.post('/', async (req, res) => {
 			requestBody.currencyAccounts[i] = companyId.concat(".", requestBody.currencyAccounts[i].currencyBalance.currency);
 		}
 
+		// let currencies = requestBody.currencyAccounts.map((account) => {
+		// 	let currencyBalance = account.currencyBalance.currency;
+		// 	let id = companyId + '.' + currencyBalance;
+
+		// 	return {
+		// 		...account,
+		// 		_id: id,
+		// 		id,
+		// 		currency: currencyBalance,
+		// 		bookCurrency: account.bookBalance.currency
+		// 	}
+		// })
+
+		// requestBody.currencyAccounts[i] = currencies.map(obj => obj.id)
+
 		// remove Headquarters object for now
-		if ("headquarters" in requestBody) {
-			delete requestBody.headquarters;
-		}
+		delete requestBody.headquarters;
 
 		// Update ownCurrency
 		requestBody.ownCurrency = requestBody.ownCurrency.code;
 
 		// Push objects to Mongo
 		// Push Addresses
-		saveCompany(requestBody);
-		console.log(await saveCurrencyAccount(currencies));
+		await saveCompany(requestBody);
+		await bulkWriteAccounts(currencies);
 
 		return res.send(requestBody);
 	} catch (e) {
@@ -79,35 +96,6 @@ async function saveCompany(data) {
 			if (err) return { err: err };
 			return true;
 		});
-    }
-}
-
-async function saveCurrencyAccount(data) {  
-	//let normalizedData = normalizeStorage(data);
-	//console.log(normalizedData)
-
-	let bulkOps = [];
-
-	for (var i = 0; i < data.length; i++) { 
-		if (data[i]._id) {
-			let model = new CurrencyAccountModel(data[i]);
-			bulkOps.push({
-				updateOne: {
-					filter: { _id: model._id},
-					update: model,
-					upsert: true
-				}
-			});
-        }
-	}
-
-	try {
-		await CurrencyAccountModel.collection.bulkWrite(bulkOps);
-		console.log("Bulk update ok");
-		return "saveCurrencyAccount: Success";
-	} catch(err) {
-		console.error('Bulk update error', err);
-		return "saveCurrencyAccount: Failed";
 	}
 }
 

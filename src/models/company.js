@@ -1,19 +1,10 @@
 import { Schema, model as Model } from 'mongoose';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
 
-const SubScore = Schema(
-	{
-		rating: String,
-		score: String
-	}
-)
-
-const RatingReport = Schema(
-	{
-		overallRating: String,
-		subRatings: [SubScore]
-	}
-)
+const SubScore = {
+	rating: String,
+	score: String
+}
 
 const CompanySchema = Schema(
 	{
@@ -22,7 +13,10 @@ const CompanySchema = Schema(
 		name: String,
 		code: String,
 		startingProfile: String,
-		ratingReport: RatingReport,
+		ratingReport: {
+			overallRating: String,
+			subRatings: [SubScore]
+		},
 
 		ownCurrency: {
 			type: String,
