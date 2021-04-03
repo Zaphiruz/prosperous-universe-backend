@@ -21,6 +21,7 @@ import { NeedQuery, NeedMutation } from './need';
 import { WorkforceQuery, WorkforceMutation } from './workforce';
 import { BuildingOptionQuery, BuildingOptionMutation } from './buildingOption';
 import { CorpOrderQuery, CorpOrderMutation } from './corpOrder';
+import { PlanetQuery, PlanetMutation } from './planet';
 
 const schemaComposer = new SchemaComposer();
 
@@ -46,6 +47,7 @@ schemaComposer.Query.addFields({
 	...WorkforceQuery,
 	...BuildingOptionQuery,
 	...CorpOrderQuery,
+	...PlanetQuery,
 });
 
 // schemaComposer.Mutation.addFields({
@@ -70,6 +72,7 @@ schemaComposer.Query.addFields({
 // 	...WorkforceMutation,
 // 	...BuildingOptionMutation,
 // 	...CorpOrderMutation,
+// 	...PlanetMutation,
 // });
 
 export default schemaComposer.buildSchema();
