@@ -6,6 +6,7 @@ const CorpOrderSchema = Schema(
 	{
 		_id: String,
 		id: String,
+		type: { type: String },
 		dateOfRequest: Date,
 		dateOfFullfillment: Date,
 		desiredFullfillmentDate: Date,
