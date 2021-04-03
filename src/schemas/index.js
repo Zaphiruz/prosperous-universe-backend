@@ -20,6 +20,7 @@ import { StorageShipQuery, StorageShipMutation } from './storageShip';
 import { NeedQuery, NeedMutation } from './need';
 import { WorkforceQuery, WorkforceMutation } from './workforce';
 import { BuildingOptionQuery, BuildingOptionMutation } from './buildingOption';
+import { PlanetQuery, PlanetMutation } from './planet';
 
 const schemaComposer = new SchemaComposer();
 
@@ -44,6 +45,7 @@ schemaComposer.Query.addFields({
 	...NeedQuery,
 	...WorkforceQuery,
 	...BuildingOptionQuery,
+	...PlanetQuery,
 });
 
 // schemaComposer.Mutation.addFields({
