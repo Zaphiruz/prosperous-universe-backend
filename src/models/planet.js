@@ -21,6 +21,7 @@ const PlanetSchema = Schema(
 			mass: Number,
 			massEarth: Number,
 			orbitIndex: Number,
+			plots: Number,
 			pressure: Number,
 			radiation: Number,
 			radius: Number,
@@ -34,7 +35,8 @@ const PlanetSchema = Schema(
 			}],
 			sunlight: Number,
 			surface: Boolean,
-			temperature: Number
+			temperature: Number,
+			takenPlots: Number
 		},
 		governor: String,
 		id: String,
@@ -44,8 +46,13 @@ const PlanetSchema = Schema(
 		namingDate: Date,
 		naturalId: String,
 		planetId: String,
-		populationId: String
-
+		populationId: String,
+		tier: {
+			gravity: Number,
+			pressure: Number,
+			temperature: Number,
+			planetTier: Number
+        }
     }
 );
 

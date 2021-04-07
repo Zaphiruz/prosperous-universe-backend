@@ -1,5 +1,4 @@
 import { PlanetTC } from '../models/planet';
-//import { OperatorTC } from '../models/operator';
 import { MaterialTC } from '../models/material';
 import { EntityTC } from '../models/entity';
 
@@ -7,7 +6,25 @@ export const PlanetQuery = {
 	planetById: PlanetTC.getResolver('findById'),
 	planetByIds: PlanetTC.getResolver('findByIds'),
 	planetOne: PlanetTC.getResolver('findOne'),
-	planetMany: PlanetTC.getResolver('findMany'),
+	planetMany: PlanetTC.getResolver('findMany')
+		.addFilterArg({
+			name: 'tickers',
+			type: '[String]',
+			destricption: 'Search by tickers',
+			query: (planet, tickers) => {
+				planet = { $in: tickers }
+
+				planet
+         }
+		})
+		.addFilterArg({
+			name: 'materials',
+			type: '[String]',
+			description: 'Search by materials',
+			query: (broker, materials) => {
+				broker.material = { $in: materials }
+			}
+		}),
 	planetCount: PlanetTC.getResolver('count'),
 	planetConnection: PlanetTC.getResolver('connection'),
 	planetPagination: PlanetTC.getResolver('pagination'),
