@@ -6,24 +6,24 @@ import { MaterialTC } from '../models/material';
 import { CompanyTC } from '../models/company';
 
 export const ProductionLineQuery = {
-	orderById: ProductionLineTC.getResolver('findById'),
-	orderByIds: ProductionLineTC.getResolver('findByIds'),
-	orderOne: ProductionLineTC.getResolver('findOne'),
-	orderMany: ProductionLineTC.getResolver('findMany'),
-	orderCount: ProductionLineTC.getResolver('count'),
-	orderConnection: ProductionLineTC.getResolver('connection'),
-	orderPagination: ProductionLineTC.getResolver('pagination'),
+	productionLineById: ProductionLineTC.getResolver('findById'),
+	productionLineByIds: ProductionLineTC.getResolver('findByIds'),
+	productionLineOne: ProductionLineTC.getResolver('findOne'),
+	productionLineMany: ProductionLineTC.getResolver('findMany'),
+	productionLineCount: ProductionLineTC.getResolver('count'),
+	productionLineConnection: ProductionLineTC.getResolver('connection'),
+	productionLinePagination: ProductionLineTC.getResolver('pagination'),
 };
 
 export const ProductionLineMutation = {
-	orderCreateOne: ProductionLineTC.getResolver('createOne'),
-	orderCreateMany: ProductionLineTC.getResolver('createMany'),
-	orderUpdateById: ProductionLineTC.getResolver('updateById'),
-	orderUpdateOne: ProductionLineTC.getResolver('updateOne'),
-	orderUpdateMany: ProductionLineTC.getResolver('updateMany'),
-	orderRemoveById: ProductionLineTC.getResolver('removeById'),
-	orderRemoveOne: ProductionLineTC.getResolver('removeOne'),
-	orderRemoveMany: ProductionLineTC.getResolver('removeMany'),
+	productionLineCreateOne: ProductionLineTC.getResolver('createOne'),
+	productionLineCreateMany: ProductionLineTC.getResolver('createMany'),
+	productionLineUpdateById: ProductionLineTC.getResolver('updateById'),
+	productionLineUpdateOne: ProductionLineTC.getResolver('updateOne'),
+	productionLineUpdateMany: ProductionLineTC.getResolver('updateMany'),
+	productionLineRemoveById: ProductionLineTC.getResolver('removeById'),
+	productionLineRemoveOne: ProductionLineTC.getResolver('removeOne'),
+	productionLineRemoveMany: ProductionLineTC.getResolver('removeMany'),
 };
 
 ProductionLineTC.addRelation('address', {
@@ -33,6 +33,28 @@ ProductionLineTC.addRelation('address', {
 	},
 	projection: {address: true }
 });
+
+ProductionLineTC
+	.getFieldOTC('orders')
+	.getFieldOTC('inputs')
+	.addRelation('material', {
+		resolver: MaterialTC.getResolver('findById'),
+		prepareArgs: {
+			_id: source => source.material
+		},
+		projection: { material: true }
+	});
+
+ProductionLineTC
+	.getFieldOTC('orders')
+	.getFieldOTC('outputs')
+	.addRelation('material', {
+		resolver: MaterialTC.getResolver('findById'),
+		prepareArgs: {
+			_id: source => source.material
+		},
+		projection: { material: true }
+	});
 
 ProductionLineTC
 	.getFieldOTC('orders')

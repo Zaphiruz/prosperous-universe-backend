@@ -3,10 +3,11 @@
     "",
     "\\src",
     "\\src\\models",
+    "\\src\\models\\shared",
     "\\src\\routes",
     "\\src\\schemas",
     "\\src\\utils"
   ],
-  "SelectedNode": "\\src\\models\\cxBroker.js",
+  "SelectedNode": "\\src\\models\\entity.js",
   "PreviewInSolutionExplorer": false
 }

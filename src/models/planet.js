@@ -52,6 +52,10 @@ const PlanetSchema = Schema(
 			pressure: Number,
 			temperature: Number,
 			planetTier: Number
+		},
+		systemId: {
+			type: String,
+			ref: 'Star'
         }
     }
 );

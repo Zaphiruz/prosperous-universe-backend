@@ -82,5 +82,5 @@ const ProductionLineSchema = Schema(
 	}
 );
 
-export const ProductionLineModel = Model('ProductionLine', ProductionLineSchema, 'productionLine');
+export const ProductionLineModel = Model('ProductionLines', ProductionLineSchema, 'productionLine');
 export const ProductionLineTC = composeWithMongoose(ProductionLineModel);

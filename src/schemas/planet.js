@@ -1,6 +1,7 @@
 import { PlanetTC } from '../models/planet';
 import { MaterialTC } from '../models/material';
 import { EntityTC } from '../models/entity';
+import { StarTC } from '../models/star';
 
 export const PlanetQuery = {
 	planetById: PlanetTC.getResolver('findById'),
@@ -8,23 +9,26 @@ export const PlanetQuery = {
 	planetOne: PlanetTC.getResolver('findOne'),
 	planetMany: PlanetTC.getResolver('findMany')
 		.addFilterArg({
-			name: 'tickers',
-			type: '[String]',
-			destricption: 'Search by tickers',
-			query: (planet, tickers) => {
-				planet = { $in: tickers }
-
-				planet
-         }
-		})
-		.addFilterArg({
 			name: 'materials',
 			type: '[String]',
 			description: 'Search by materials',
-			query: (broker, materials) => {
-				broker.material = { $in: materials }
+			query: (planetQuery, materials) => {
+				planetQuery['data.resources.material'] = { $in: materials }
 			}
-		}),
+		})
+		//.addFilterArg({
+		//	name: 'lessThanFertility',
+		//	type: '[String]',
+		//	description: 'Search by materials',
+		//	query: (planetQuery, materials) => {
+		//		planetQuery['data.resources.material'] = { $in: materials }
+		//	}
+		//})
+		.addSortArg({
+			name: "sortOrder",
+			description: "1 for assending, -1 for decending",
+			value: { data: { resources: { factor: -1 } } },
+        }),
 	planetCount: PlanetTC.getResolver('count'),
 	planetConnection: PlanetTC.getResolver('connection'),
 	planetPagination: PlanetTC.getResolver('pagination'),
@@ -55,9 +59,18 @@ PlanetTC
 PlanetTC
 	.getFieldOTC('address')
 	.addRelation('lines', {
-	resolver: EntityTC.getResolver('findById'),
-	prepareArgs: {
-		_id: source => source.entity
-	},
-	projection: { lines: [] }
-})
+		resolver: EntityTC.getResolver('findById'),
+		prepareArgs: {
+			_id: source => source.lines
+		},
+		projection: { lines: [] }
+	});
+
+PlanetTC
+	.addRelation('systemId', {
+		resolver: StarTC.getResolver('findById'),
+		prepareArgs: {
+			_id: source => source.systemId
+		},
+		projection: { systemId: true }
+	});
