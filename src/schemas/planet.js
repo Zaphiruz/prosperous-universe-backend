@@ -31,7 +31,31 @@ export const PlanetQuery = {
         }),
 	planetCount: PlanetTC.getResolver('count'),
 	planetConnection: PlanetTC.getResolver('connection'),
-	planetPagination: PlanetTC.getResolver('pagination'),
+	planetPagination: PlanetTC.getResolver('pagination')
+		//.addFilterArg({		// TODO Figure out if this can work. At present, it can't? Can't filter based on child properties? May be wrong here
+		//	name: 'toMoria',
+		//	type: '[Int]',
+		//	description: 'Distance to Moria',
+		//	query: (planetQuery, toMoria) => {
+		//		planetQuery['systemId.distances.toMoria'] = { $in: toMoria }	//MongoDB -> $in, $other$words
+  //          }
+  //      })
+		.addFilterArg({
+			name: 'materials',
+			type: '[String]',
+			description: 'Search by materials',
+			query: (planetQuery, materials) => {
+				planetQuery['data.resources.material'] = { $in: materials }
+			}
+		})
+		//.addSortArg({
+		//	name: '_MORIA_ASC',
+		//	value: {"systemId.distances.toMoria": 'ASC'}
+		//})
+		.addSortArg({
+			name: '_NAME_ASC',
+			value: {name: 'ASC'}
+        }),
 };
 
 export const PlanetMutation = {

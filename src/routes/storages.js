@@ -11,7 +11,7 @@ const bulkWriteShipStorages = bulkWrite(StorageShipModel);
 router.post('/', async (req, res) => {
 	console.log("Recieved storages request")
 	try {
-		let data = Object.values(req.body);
+		let data = Object.values(req.body).filter((item) => { item.type !== "SHIPMENT"});
 		let [ships, sites] = partition(data, ({ type }) => ShipStorageTypes.includes(type));
 
 		console.log(ships.length, sites.length)
