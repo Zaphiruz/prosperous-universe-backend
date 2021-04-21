@@ -11,10 +11,31 @@ const bulkWriteShipStorages = bulkWrite(StorageShipModel);
 router.post('/', async (req, res) => {
 	console.log("Recieved storages request")
 	try {
-		let data = Object.values(req.body).filter((item) => { item.type !== "SHIPMENT"});
+		let data = Object.values(req.body);
 		let [ships, sites] = partition(data, ({ type }) => ShipStorageTypes.includes(type));
+		
+		ships = ships.map((item) => {
+			let items = [];
+			item.items.map((inv) => {
+				if (inv.type !== "SHIPMENT") {
+					items.push(inv);
+				};
+			});
+			item.items = items;
+			return item;
+		});
 
-		console.log(ships.length, sites.length)
+		sites = sites.map((item) => {
+			let items = [];
+			item.items.map((inv) => {
+				if (inv.type !== "SHIPMENT") {
+					items.push(inv);
+				};
+			});
+			item.items = items;
+			return item;
+		});
+
 		let siteRecords = await bulkWriteSiteStorages(sites.map(normalizeStorageSite));
 		let shipRecords = await bulkWriteShipStorages(ships.map(normalizeStorageShip));
 		return res.send({siteRecords, shipRecords});
