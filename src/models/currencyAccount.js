@@ -10,7 +10,7 @@ const CurrencyAccountSchema = Schema(
 		currencyBalance: Price,
 		category: String,
 		number: Number,
-		type: Number,
+		type: { type: Number },
 		currency: {
 			type: String,
 			ref: 'Currency'

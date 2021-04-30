@@ -1,8 +1,5 @@
-import { Schema } from 'mongoose';
 
-export default Schema(
-	{
-		amount: Number,
-		currency: String,
-	}
-);
+export default {
+	amount: Number,
+	currency: String,
+}

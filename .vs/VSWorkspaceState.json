@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\models",
+    "\\src\\models\\shared",
+    "\\src\\routes",
+    "\\src\\schemas",
+    "\\src\\utils"
+  ],
+  "SelectedNode": "\\src\\routes\\storages.js",
+  "PreviewInSolutionExplorer": false
+}

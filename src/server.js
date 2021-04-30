@@ -3,28 +3,40 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import { graphqlHTTP } from 'express-graphql';
-import graphqlSchema from './schemas/index';
 import graphqlPlayground from 'graphql-playground-middleware-express';
-const extentions = function({ context }) {
-	return {
-		runTime: Date.now() - context.startTime
-	};
-}
+
+// routes
+import graphql from './routes/graphql';
+import storages from './routes/storages';
+import companies from './routes/companies';
+import workforce from './routes/workforces';
+import production from './routes/production';
+import fxBrokers from './routes/fxBrokers';
+import sites from './routes/sites';
+import corpOrders from './routes/corpOrders';
 
 dotenv.config();
 
 const app = express();
 
-app.options('/graphql', cors());
-app.use('/graphql', cors() ,graphqlHTTP((request) => {
-	return {
-		context: { startTime: Date.now() },
-		graphql: true,
-		schema: graphqlSchema,
-		extentions
-	};
-}));
+// post middleware
+app.use(express.json());
+
+// routes
+const routes = {
+	graphql,
+	storages,
+	companies,
+	workforce,
+	production,
+	workforce,
+	fxBrokers,
+	sites,
+	corpOrders
+};
+for(let [route, router] of Object.entries(routes)) {
+	app.use(`/${route}`, cors(), router);
+}
 
 app.get('/', graphqlPlayground({ endpoint: '/graphql' }));
 

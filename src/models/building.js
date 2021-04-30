@@ -4,21 +4,21 @@ import Price from './shared/price';
 import Timestamp from './shared/timestamp';
 import RepairMaterial from './shared/repair-material';
 
-const Module = Schema(
-	{
-		id: String,
-		platformId: String,
-		reactorId: String,
-		reactorName: String,
-		reactorTicker: String,
-		type: String,
-	}
-)
+const Module = {
+	id: String,
+	platformId: String,
+	reactorId: String,
+	reactorName: String,
+	reactorTicker: String,
+	type: { type: String},
+}
+
 
 const BuildingSchema = Schema(
 	{
 		_id: String,
 		id: String,
+		area: Number,
 		bookValue: Price,
 		condition: Number,
 		creationTime: Timestamp,
@@ -30,7 +30,7 @@ const BuildingSchema = Schema(
 			type: String,
 			ref: "Company"
 		},
-		site: {
+		siteId: {
 			type: String,
 			ref: 'Site'
 		}
