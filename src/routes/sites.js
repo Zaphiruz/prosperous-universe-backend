@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
 			req.body[key].address = lines;
 
 			// Adjust platforms
-			for (let i = 0; i < req.body[key].platforms.length; i++) {
+			for (let i = 0; i < req.body[key]?.platforms.length; i++) {
 				req.body[key].platforms[i]._id = req.body[key].platforms[i].id;
 				req.body[key].platforms[i].owner = req.body[key].owner;
 				buildings.push(req.body[key].platforms[i]);
@@ -42,9 +42,9 @@ router.post('/', async (req, res) => {
 			sites.push(model);
 		}
 
-		let siteRecords = await bulkWriteSite(sites);
-		let entitiesRecords = await bulkWriteEntity(entities);
-		let buildingsRecords = await bulkWriteBuilding(buildings);
+		if (sites.length > 0) let siteRecords = await bulkWriteSite(sites);
+		if (entities.length > 0) let entitiesRecords = await bulkWriteEntity(entities);
+		if (buildings.length > 0) let buildingsRecords = await bulkWriteBuilding(buildings);
 		return res.send({ siteRecords, entitiesRecords, buildingsRecords});
 	} catch (e) {
 		console.error(e);
