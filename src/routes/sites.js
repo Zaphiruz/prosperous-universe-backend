@@ -30,12 +30,14 @@ router.post('/', async (req, res) => {
 			req.body[key].address = lines;
 
 			// Adjust platforms
-			for (let i = 0; i < req.body[key]?.platforms.length; i++) {
-				req.body[key].platforms[i]._id = req.body[key].platforms[i].id;
-				req.body[key].platforms[i].owner = req.body[key].owner;
-				buildings.push(req.body[key].platforms[i]);
-			}
-
+			if ('platforms' in req.body[key]) {
+				for (let i = 0; i < req.body[key].platforms.length; i++) {
+					req.body[key].platforms[i]._id = req.body[key].platforms[i].id;
+					req.body[key].platforms[i].owner = req.body[key].owner;
+					buildings.push(req.body[key].platforms[i]);
+				}
+            }
+			
 			delete req.body[key].buildOptions;
 
 			let model = SiteModel(req.body[key]);
