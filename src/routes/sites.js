@@ -44,9 +44,9 @@ router.post('/', async (req, res) => {
 			sites.push(model);
 		}
 
-		if (sites.length !== 0) let siteRecords = await bulkWriteSite(sites);
-		if (entities.length !== 0) let entitiesRecords = await bulkWriteEntity(entities);
-		if (buildings.length !== 0) let buildingsRecords = await bulkWriteBuilding(buildings);
+		let siteRecords = await bulkWriteSite(sites);
+		let entitiesRecords = await bulkWriteEntity(entities);
+		let buildingsRecords = await bulkWriteBuilding(buildings);
 		return res.send({ siteRecords, entitiesRecords, buildingsRecords});
 	} catch (e) {
 		console.error(e);
