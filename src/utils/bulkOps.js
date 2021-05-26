@@ -13,6 +13,6 @@ export const write = Model => data => {
 				upsert: true
 			}
 		}))
-	
+
 	return Model.collection.bulkWrite(bulkOps);
 }

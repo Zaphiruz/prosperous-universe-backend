@@ -10,9 +10,7 @@ router.post('/', async (req, res) => {
 		console.log("Received fxBrokers request");
 
 		let data = Array.isArray(req.body) ? req.body : [];
-		console.log(data);
 		let normalized = data.map(normalizeFxBroker)
-		console.log(normalized);
 		await bulkWriteFxBrokers(normalized);
 
 		return res.send(normalized.map(normalized => normalized._id))
