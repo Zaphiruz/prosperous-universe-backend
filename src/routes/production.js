@@ -46,6 +46,8 @@ router.post('/', async (req, res) => {
 				}
 				req.body[key].productionTemplates[i].productionFeeCollector = req.body[key].productionTemplates[i].productionFeeCollector.id;
 			}
+			req.body[key].updatedAt = Date.now();
+
 			output.push(req.body[key]);
 		}
 

@@ -72,7 +72,9 @@ const ProductionLineSchema = Schema(
 			expertiseCategory: String,
 			type: { type: String },
 			value: Number
-		}]
+		}],
+		createdAt: { type: Date, default: Date.Now },
+		updatedAt: Number
 	},
 	{
 		timestamps: {
@@ -81,6 +83,43 @@ const ProductionLineSchema = Schema(
 		}
 	}
 );
+
+//ProductionLineSchema.pre("update", () => {
+//	this.update({}, { $set: { updatedAt: new Date() } });
+//	console.log("Should be working? 1");
+//	next();
+//});
+//ProductionLineSchema.pre("updateMany", { document: true, query: false }, () => {
+//	this.update({}, { $set: { updatedAt: new Date() } });
+//	console.log("Should be working? 2");
+//	next();
+//});
+ProductionLineSchema.pre("update", function (next) {
+	console.log("Should be working? 2");
+	this.update({}, { $set: { updatedAt: new Date() } });
+	next();
+});
+ProductionLineSchema.pre("updateOne", { document: true, query: false }, () => {
+	console.log("Should be working? 2");
+	this.update({}, { $set: { updatedAt: new Date() } });
+});
+//ProductionLineSchema.pre("update", () => {
+//	this.update({}, { $set: { updated_at: new Date() } });
+//	console.log("Should be working? 1");
+//	next();
+//});
+//ProductionLineSchema.pre("updateMany", { document: true, query: false }, () => {
+//	this.update({}, { $set: { updated_at: new Date() } });
+//	console.log("Should be working? 2");
+//	next();
+//});
+//ProductionLineSchema.pre("updateOne", { document: true, query: false }, () => {
+//	this.update({}, { $set: { updated_at: new Date() } });
+//	console.log("Should be working? 2");
+//	next();
+//});
+
+
 
 export const ProductionLineModel = Model('ProductionLines', ProductionLineSchema, 'productionLine');
 export const ProductionLineTC = composeWithMongoose(ProductionLineModel);

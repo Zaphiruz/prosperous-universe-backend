@@ -10,7 +10,6 @@ router.post('/', async (req, res) => {
 		console.log("Received corpOrder request");
 
 		let data = Array.isArray(req.body) ? req.body : [];
-		console.log(data.length);
 		let normalized = data.map(normalizeCorpOrder)
 		let results = await bulkWriteCorpOrders(normalized);
 

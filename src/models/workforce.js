@@ -29,7 +29,8 @@ const WorkforceSchema = Schema(
 		address: [{
 			type: String,
 			ref: 'Entity'
-		}]
+		}],
+		updatedAt: Number
 	},
 	{
 		timestamps: {
@@ -48,6 +49,7 @@ export const normalizeWorkforce = (data) => {
 		workforces: data.workforces.map(workforce => ({
 			...workforce,
 			needs: workforce.level
-		}))
+		})),
+		updatedAt: Date.now()
 	}
 }

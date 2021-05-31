@@ -40,6 +40,8 @@ router.post('/', async (req, res) => {
 			
 			delete req.body[key].buildOptions;
 
+			req.body[key].updatedAt = Date.now();
+
 			let model = SiteModel(req.body[key]);
 			sites.push(model);
 		}
