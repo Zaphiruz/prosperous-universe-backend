@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 		ships = ships.map((item) => {
 			let items = [];
 			item.items.map((inv) => {
-				if (inv.type !== "SHIPMENT") {
+				if (inv.type !== "SHIPMENT" && inv.type !== "BLOCKED") {
 					items.push(inv);
 				};
 			});
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 		sites = sites.map((item) => {
 			let items = [];
 			item.items.map((inv) => {
-				if (inv.type !== "SHIPMENT") {
+				if (inv.type !== "SHIPMENT" && inv.type !== "BLOCKED") {
 					items.push(inv);
 				};
 			});
