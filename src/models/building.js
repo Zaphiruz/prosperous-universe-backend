@@ -2,7 +2,7 @@ import { Schema, model as Model } from 'mongoose';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
 import Price from './shared/price';
 import Timestamp from './shared/timestamp';
-import RepairMaterial from './shared/repair-material';
+import { RepairMaterial, normalizeMaterial } from './shared/repair-material';
 
 const Module = {
 	id: String,
@@ -45,3 +45,13 @@ const BuildingSchema = Schema(
 
 export const BuildingModel = Model('Buildings', BuildingSchema);
 export const BuildingTC = composeWithMongoose(BuildingModel);
+
+export const normalizeBuilding = (siteData) => (buildingData) => {
+	return {
+		...buildingData,
+		_id: buildingData.id,
+		owner: siteData.owner,
+		repairMaterials: buildingData.repairMaterials.map(normalizeMaterial),
+		reclaimableMaterials: buildingData.reclaimableMaterials.map(normalizeMaterial)
+	}
+}

@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 import { SiteModel } from '../models/site';
 import { EntityModel } from '../models/entity';
-import { BuildingModel } from '../models/building';
+import { BuildingModel, normalizeBuilding } from '../models/building';
 import { write as bulkWrite } from '../utils/bulkOps';
 
 const bulkWriteSite = bulkWrite(SiteModel);
@@ -18,32 +18,30 @@ router.post('/', async (req, res) => {
 		let addresses = []; // TODO: add to bulk exporter
 
 		for (let key in req.body) {
-			req.body[key]._id = key;
+			let siteObj = req.body[key];
+			siteObj._id = key;
 
 			// Adust address
-			let lines = [];
-            for (let i = 0;  i < req.body[key].address.lines.length; i++) {
-				req.body[key].address.lines[i]._id = req.body[key].address.lines[i].entity.id;
-				entities.push(req.body[key].address.lines[i]);
-				lines.push(req.body[key].address.lines[i]._id);
-			}
-			req.body[key].address = lines;
+			siteObj.address = siteObj.address.lines.map((addressBody) => {
+				entities.push({
+					...addressBody,
+					_id: addressBody.entity.id
+				});
+				return addressBody.id;
+			});
 
 			// Adjust platforms
-			if ('platforms' in req.body[key]) {
-				for (let i = 0; i < req.body[key].platforms.length; i++) {
-					req.body[key].platforms[i]._id = req.body[key].platforms[i].id;
-					req.body[key].platforms[i].owner = req.body[key].owner;
-					buildings.push(req.body[key].platforms[i]);
-				}
-            }
+			if ('platforms' in siteObj) {
+				buildings = siteObj.platforms.map(normalizeBuilding(siteObj))
+				siteObj.platforms = buildings.map(building => building.id)
+			}
 			
-			delete req.body[key].buildOptions;
+			delete siteObj.buildOptions;
 
-			req.body[key].updatedAt = Date.now();
+			siteObj.updatedAt = Date.now();
 
-			let model = SiteModel(req.body[key]);
-			sites.push(model);
+			let siteModel = SiteModel(siteObj);
+			sites.push(siteModel);
 		}
 
 		let siteRecords = await bulkWriteSite(sites);
