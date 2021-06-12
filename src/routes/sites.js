@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 					...addressBody,
 					_id: addressBody.entity.id
 				});
-				return addressBody.id;
+				return addressBody.entity.id;
 			});
 
 			// Adjust platforms
