@@ -32,8 +32,9 @@ router.post('/', async (req, res) => {
 
 			// Adjust platforms
 			if ('platforms' in siteObj) {
-				buildings = siteObj.platforms.map(normalizeBuilding(siteObj))
-				siteObj.platforms = buildings.map(building => building.id)
+				let localBuildings = siteObj.platforms.map(normalizeBuilding(siteObj));
+				buildings.push(localBuildings);
+				siteObj.platforms = localBuildings.map(building => building.id);
 			}
 			
 			delete siteObj.buildOptions;
@@ -46,7 +47,7 @@ router.post('/', async (req, res) => {
 
 		let siteRecords = await bulkWriteSite(sites);
 		let entitiesRecords = await bulkWriteEntity(entities);
-		let buildingsRecords = await bulkWriteBuilding(buildings);
+		let buildingsRecords = await bulkWriteBuilding(buildings.flat());
 		return res.send({ siteRecords, entitiesRecords, buildingsRecords});
 	} catch (e) {
 		console.error(e);
