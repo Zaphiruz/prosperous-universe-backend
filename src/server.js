@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import graphqlPlayground from 'graphql-playground-middleware-express';
+import path from 'path';
 
 // routes
 import graphql from './routes/graphql';
@@ -18,6 +19,9 @@ import corpOrders from './routes/corpOrders';
 dotenv.config();
 
 const app = express();
+
+// static middleware
+app.use('/files', express.static(path.join(__dirname, '/public')));
 
 // post middleware
 app.use(express.json({ limit: '5mb' }));
