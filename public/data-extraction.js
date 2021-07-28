@@ -1,7 +1,7 @@
 async function extract() {
 	// All code is executed in a local scope.
 	// For example, the following does NOT overwrite the global `alert` method
-	console.log("Prosperon Chrome Extention Running!");
+	console.log("PROSPERON >> Prosperon Chrome Extention Running!");
 
 	// --- Data collection ---
 	let stateTemp = document.getElementById('container')?._reactRootContainer._internalRoot.current.child.child.child.pendingProps.store?.getState().toJS();
@@ -70,15 +70,15 @@ function wait(ms) {
 }
 
 async function postDataRequest(data, type) {
-	console.debug(type + " sending off", data);
+	console.debug('PROSPERON >> ', type + " sending off", data);
 	postData('http://localhost:8080/' + type, data)
 		 .then(dataReturned => {
-			  console.log(type + " return:", dataReturned);
+			  console.log('PROSPERON >> ', type + " return:", dataReturned);
 		 });
 };
 
 async function postData(url = '', data = {}) {
-	console.debug("entering postData. data: ", data);
+	console.debug("PROSPERON >> entering postData. data: ", data);
 	const response = await fetch(url, {
 		 method: 'POST',
 		 headers: {
@@ -90,12 +90,14 @@ async function postData(url = '', data = {}) {
 }
 
 (async function main() {
-	console.debug('starting timer (5m)');
+	console.debug('PROSPERON >> starting timers (5m, 30m, 60m)');
+	setInterval(extract, 60 * 60 * 1000) // 60 minutes
+
 	await wait(5 * 60 * 1000) // 5 minutes
 	extract();
 
-	console.debug('starting timer (30m)');
-	setInterval(extract, 30 * 60 * 1000) // 30 minutes
+	await wait(25 * 60 * 1000) // 25 minutes (30m total)
+	extract();
 })();
 
-console.debug('scriped loaded');
+console.debug('PROSPERON >> scriped loaded');
