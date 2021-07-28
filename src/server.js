@@ -21,7 +21,7 @@ dotenv.config();
 const app = express();
 
 // static middleware
-app.use('/files', express.static(path.join(__dirname, '/public')));
+app.use('/files', express.static(path.resolve(__dirname, '../public')));
 
 // post middleware
 app.use(express.json({ limit: '5mb' }));
