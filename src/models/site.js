@@ -19,7 +19,8 @@ const SiteSchema = Schema(
 		platforms: [{
 			type: String,
 			ref: 'Building'
-		}]
+		}],
+		updatedAt: Number
 	},
 	{
 		timestamps: {

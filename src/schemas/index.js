@@ -15,10 +15,15 @@ import { EntityQuery, EntityMutation } from './entity';
 import { CompanyQuery, CompanyMutation } from './company';
 import { BuildingQuery, BuildingMutation } from './building';
 import { SiteQuery, SiteMutation } from './site';
-import { StorageQuery, StorageMutation } from './storage';
+import { StorageSiteQuery, StorageSiteMutation } from './storageSite';
+import { StorageShipQuery, StorageShipMutation } from './storageShip';
 import { NeedQuery, NeedMutation } from './need';
 import { WorkforceQuery, WorkforceMutation } from './workforce';
 import { BuildingOptionQuery, BuildingOptionMutation } from './buildingOption';
+import { CorpOrderQuery, CorpOrderMutation } from './corpOrder';
+import { PlanetQuery, PlanetMutation } from './planet';
+import { StarQuery, StarMutation } from './star';
+import { ProductionLineQuery, ProductionLineMutation } from './productionLine';
 
 const schemaComposer = new SchemaComposer();
 
@@ -38,10 +43,15 @@ schemaComposer.Query.addFields({
 	...CompanyQuery,
 	...BuildingQuery,
 	...SiteQuery,
-	...StorageQuery,
+	...StorageSiteQuery,
+	...StorageShipQuery,
 	...NeedQuery,
 	...WorkforceQuery,
 	...BuildingOptionQuery,
+	...CorpOrderQuery,
+	...PlanetQuery,
+	...StarQuery,
+	...ProductionLineQuery,
 });
 
 // schemaComposer.Mutation.addFields({
@@ -60,10 +70,15 @@ schemaComposer.Query.addFields({
 // 	...CompanyMutation,
 // 	...BuildingMutation,
 // 	...SiteMutation,
-// 	...StorageMutation,
+// 	...StorageSiteMutation,
+// 	...StorageShipMutation,
 // 	...NeedMutation,
 // 	...WorkforceMutation,
 // 	...BuildingOptionMutation,
+// 	...CorpOrderMutation,
+//  ...PlanetMutation,
+//  ...StarMutation,
+//  ...ProductionLineMutation,
 // });
 
 export default schemaComposer.buildSchema();
