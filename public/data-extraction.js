@@ -71,7 +71,7 @@ function wait(ms) {
 
 async function postDataRequest(data, type) {
 	console.debug('PROSPERON >> ', type + " sending off", data);
-	postData('http://localhost:8080/' + type, data)
+	postData('https://api.prosperon.app/' + type, data)
 		 .then(dataReturned => {
 			  console.log('PROSPERON >> ', type + " return:", dataReturned);
 		 });
